@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.musicbajao.viewModel.loginSinup.home.MyProfileViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/consLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/theme_color"
+            tools:context=".view.fragment.ProfileFragment">
+
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tab_layout_gradient"
+                android:paddingBottom="100dp"
+                android:text="@={viewModel.welcomeQuote}"
+                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/circularProfile"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="70dp"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="5dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/editProfileButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:contentDescription="@string/change_profile"
+                android:src="@drawable/ic_profile_edit_button_foreground"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/circularProfile"
+                app:layout_constraintEnd_toEndOf="@id/circularProfile" />
+
+
+            <TextView
+                android:id="@+id/lastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:text="@string/username"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/name" />
+
+            <EditText
+                android:id="@+id/inputUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edit_text"
+                android:drawablePadding="10dp"
+                android:enabled="false"
+                android:hint="@string/username"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:padding="10dp"
+                android:text="@={viewModel.inputUsername}"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lastname" />
+
+            <TextView
+                android:id="@+id/firstname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/firstname"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:padding="10dp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/inputUsername" />
+
+            <EditText
+                android:id="@+id/inputName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edit_text"
+                android:drawablePadding="10dp"
+                android:enabled="false"
+                android:hint="@string/firstname"
+                android:visibility="invisible"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:padding="10dp"
+                android:text="@={viewModel.inputFirstname}"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/firstname" />
+
+            <TextView
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/password"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:padding="10dp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/inputName" />
+
+            <EditText
+                android:id="@+id/inputPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edit_text"
+                android:drawablePadding="10dp"
+                android:enabled="false"
+                android:hint="@string/password"
+                android:importantForAutofill="no"
+                android:padding="10dp"
+                android:text="@={viewModel.inputPassword}"
+                android:textColor="@color/black"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/password" />
+
+            <TextView
+                android:id="@+id/dataChanged"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="30dp"
+
+                android:textColor="@color/white"
+                android:text="@string/profile_successfully_updated"
+
+
+                android:textSize="20sp"
+                android:visibility="invisible"
+
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/inputPassword" />
+
+            <Button
+                android:id="@+id/editProfile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/button_gradient"
+
+                android:text="@string/update_profile"
+                app:backgroundTint="#575757"
+                app:layout_constraintTop_toBottomOf="@id/dataChanged"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <Button
+                android:id="@+id/signOutBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+
+
+                android:background="@drawable/button_gradient"
+                android:text="@string/sign_out"
+                app:backgroundTint="#575757"
+
+                app:layout_constraintEnd_toEndOf="@id/editProfile"
+                app:layout_constraintStart_toStartOf="@id/editProfile"
+                app:layout_constraintTop_toBottomOf="@id/editProfile"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+</layout>
