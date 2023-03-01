@@ -47,7 +47,6 @@ class MusicPlayerActivity : AppCompatActivity(), View.OnClickListener, ServiceCo
 
         attachListeners()
 
-
     }
 
     private fun startPlaying() {

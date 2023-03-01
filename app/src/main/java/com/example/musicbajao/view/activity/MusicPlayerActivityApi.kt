@@ -35,6 +35,10 @@ class MusicPlayerActivityApi : AppCompatActivity(), View.OnClickListener {
         songsList = intent.getSerializableExtra("audioApi") as ArrayList<Item>
         songPosition = intent.getIntExtra("positionApi", -1)
         mediaPlayer = null
+
+        MusicPlayerActivity.musicService?.mediaPlayer?.stop()
+        MusicPlayerActivity.musicService?.stopForeground(true)
+
         attachListeners()
         playSong()
     }

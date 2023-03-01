@@ -26,8 +26,8 @@ class HomeRepo(private val context: Context) {
                     Log.d("Tokenss", response.code().toString())
                     Log.d("tracks", response.body()!!.tracks.items[0].track.artists.toString())
                     Log.d("tracks", response.body()!!.tracks.items[0].track.duration_ms.toString())
-                    Log.d("tracks", response.body()!!.tracks.items[0].track.href.toString())
-                    Log.d("tracks", response.body()!!.tracks.items[0].track.name.toString())
+                    Log.d("tracks", response.body()!!.tracks.items[0].track.href)
+                    Log.d("tracks", response.body()!!.tracks.items[0].track.name)
                     Log.d(
                         "tracks",
                         response.body()?.tracks?.items?.get(0)?.track?.preview_url.toString()

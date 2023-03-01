@@ -3,6 +3,10 @@ package com.example.musicbajao.view.musicservice
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.BitmapFactory.decodeResource
+import android.media.MediaMetadataRetriever
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Binder
@@ -49,12 +53,23 @@ class MusicService : Service() {
         val exitIntent = Intent(baseContext, NotificationReceiver::class.java).setAction(ApplicationClass.EXIT)
         val exitPendingIntent = PendingIntent.getBroadcast(baseContext, 0, exitIntent, PendingIntent.FLAG_IMMUTABLE)
 
+        val retriever = MediaMetadataRetriever()
+        retriever.setDataSource(MusicPlayerActivity.songsList[MusicPlayerActivity.songPosition].audioPath)
+        val artBytes = retriever.embeddedPicture
+
 
         val notification = NotificationCompat.Builder(baseContext, ApplicationClass.CHANNEL_ID)
             .setContentTitle(MusicPlayerActivity.songsList[MusicPlayerActivity.songPosition].audioName)
             .setContentText(MusicPlayerActivity.songsList[MusicPlayerActivity.songPosition].audioArtist)
             .setSmallIcon(R.drawable.ic_notification)
-            .setLargeIcon(MediaStore.Images.Media.getBitmap(contentResolver, Uri.parse(MusicPlayerActivity.songsList[MusicPlayerActivity.songPosition].audioImage)))
+            .apply {
+                if(artBytes != null){
+                    setLargeIcon(MediaStore.Images.Media.getBitmap(contentResolver, Uri.parse(MusicPlayerActivity.songsList[MusicPlayerActivity.songPosition].audioImage)))
+                }
+                else{
+                    setLargeIcon(BitmapFactory.decodeResource(resources,R.id.music_image_logo))
+                }
+            }
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .setOnlyAlertOnce(true)

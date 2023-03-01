@@ -32,16 +32,13 @@ class DownloadsFragment : Fragment() {
         binding.recyclerAudioList.layoutManager = LinearLayoutManager(contextDownloads)
         viewModel = ViewModelProvider(this).get(DownloadsViewModel::class.java)
 
-        try {
-            viewModel.getAllAudioFromDevice(contextDownloads).observe(viewLifecycleOwner, Observer { audioList ->
+        viewModel.getAllAudioFromDevice(contextDownloads)
+            .observe(viewLifecycleOwner, Observer { audioList ->
                 allAudio = audioList
                 musicListAdapter = MusicListAdapter(contextDownloads, allAudio)
                 binding.recyclerAudioList.adapter = musicListAdapter
             })
-            addSearchView()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        addSearchView()
         return binding.root
     }
 
