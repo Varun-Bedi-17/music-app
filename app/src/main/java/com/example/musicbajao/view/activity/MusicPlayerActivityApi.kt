@@ -59,7 +59,6 @@ class MusicPlayerActivityApi : AppCompatActivity(), View.OnClickListener {
         initializeLayout()
         enableSeekBar()
         seekBarUpdater()
-
     }
 
 

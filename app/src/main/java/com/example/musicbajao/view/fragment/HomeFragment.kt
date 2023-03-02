@@ -42,10 +42,15 @@ class HomeFragment : Fragment() {
 
         GlobalScope.launch(Dispatchers.IO) {
             val allSongs = viewModel.getAllSongs()
-            withContext(Dispatchers.Main){
-                val musicListApiAdapter = MusicListApiAdapter(contextFragment, allSongs)
-                binding.recyclerAudioList.adapter = musicListApiAdapter
+            withContext(Dispatchers.Main) {
+                if (allSongs.isNotEmpty()) {
+                    val musicListApiAdapter = MusicListApiAdapter(contextFragment, allSongs)
+                    binding.recyclerAudioList.adapter = musicListApiAdapter
+                    binding.noInteretConnection.visibility = View.GONE
 
+                } else {
+                    binding.noInteretConnection.visibility = View.VISIBLE
+                }
             }
         }
 
@@ -58,8 +63,6 @@ class HomeFragment : Fragment() {
     }
 }
 
-
-// =====================================================================================================================
 
 
 

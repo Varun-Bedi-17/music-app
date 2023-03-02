@@ -1,4 +1,4 @@
-package com.example.musicbajao.model.roomdatabase
+package com.example.musicbajao.model.repository
 
 import android.content.Context
 import androidx.lifecycle.LiveData

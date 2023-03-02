@@ -6,7 +6,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.musicbajao.model.roomdatabase.UserRepo
+import com.example.musicbajao.model.repository.UserRepo
 import com.example.musicbajao.model.roomdatabase.UserEntity
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.*

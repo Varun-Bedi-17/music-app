@@ -1,7 +1,7 @@
-package com.example.musicbajao.model.repository
+package com.example.musicbajao.model.api
 
+import com.example.musicbajao.model.TokenModel
 import com.example.musicbajao.model.repo.musicapi.data.AudioModelApi
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -16,5 +16,5 @@ interface MusicApi {
 
 
     @GET("v1/playlists/37i9dQZF1DX14CbVHtvHRB")
-    suspend fun getAlbums(): Response<AudioModelApi>
+    suspend fun getAlbums(): Result<AudioModelApi>
 }

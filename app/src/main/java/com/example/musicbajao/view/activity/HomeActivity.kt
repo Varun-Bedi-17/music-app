@@ -8,14 +8,10 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.example.musicbajao.R
 import com.example.musicbajao.databinding.ActivityHomeBinding
-import com.example.musicbajao.model.repository.MusicApi
-import com.example.musicbajao.model.repository.TokenHelper
 import com.example.musicbajao.view.adapters.HomeViewPagerAdapter
 import com.example.musicbajao.view.fragment.DownloadsFragment
 import com.example.musicbajao.view.fragment.HomeFragment
 import com.example.musicbajao.view.fragment.ProfileFragment
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 const val REQUEST_CODE_STORAGE = 103
 const val REQUEST_CODE_WRITE_STORAGE = 110

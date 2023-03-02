@@ -1,8 +1,7 @@
-package com.example.musicbajao.model.repository
+package com.example.musicbajao.model.api
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -35,10 +34,9 @@ object MusicHelper {
 
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .apply {
-                client?.let { client(it) }
-            }
+            .client(client)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(ResultCallAdapterFactory())
             .build()
     }
 
@@ -46,7 +44,5 @@ object MusicHelper {
         val preference = context.getSharedPreferences("token", AppCompatActivity.MODE_PRIVATE)
         return preference.getString("token", null)
     }
-
-
 
 }

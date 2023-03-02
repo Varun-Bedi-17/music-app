@@ -1,4 +1,4 @@
-package com.example.musicbajao.model.repository
+package com.example.musicbajao.model
 
 import com.google.gson.annotations.SerializedName
 

@@ -3,11 +3,15 @@ package com.example.musicbajao.model.repository
 import android.content.Context
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.musicbajao.model.api.MusicApi
+import com.example.musicbajao.model.api.MusicHelper
+import com.example.musicbajao.model.api.TokenHelper
 import com.example.musicbajao.model.repo.musicapi.data.Item
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-
+import retrofit2.HttpException
+import java.io.IOException
 
 
 class HomeRepo(private val context: Context) {
@@ -18,39 +22,24 @@ class HomeRepo(private val context: Context) {
         val token = getToken()
         if (token != null) {
             val musicApiAlbum = MusicHelper.getInstance(context).create(MusicApi::class.java)
-            try {
-                val response = musicApiAlbum.getAlbums()
-                if (response.isSuccessful) {
-                    songList = response.body()!!.tracks.items
+            val result = musicApiAlbum.getAlbums()
+            result.onSuccess {
+                Log.d("Success state", it.toString())
+                songList = it.tracks.items
 
-                    Log.d("Tokenss", response.code().toString())
-                    Log.d("tracks", response.body()!!.tracks.items[0].track.artists.toString())
-                    Log.d("tracks", response.body()!!.tracks.items[0].track.duration_ms.toString())
-                    Log.d("tracks", response.body()!!.tracks.items[0].track.href)
-                    Log.d("tracks", response.body()!!.tracks.items[0].track.name)
-                    Log.d(
-                        "tracks",
-                        response.body()?.tracks?.items?.get(0)?.track?.preview_url.toString()
-                    )
+            }.onFailure {
+                Log.d("Network error", it.toString())
+                if (it is IOException) {
+                    return emptyList()
+                } else if (it is HttpException) {
+                    getTokenFromServer()
                 } else {
-                    when (response.code()) {
-                        401 -> {
-                            getTokenFromServer()
-                        }
-                        else -> {
-                            Log.i("Response", "Not 401")
-                        }
-                    }
+                    Log.d("Error in calling api", it.toString())
+                    return emptyList()
                 }
-                Log.d("Checking ", "api hit")
 
-
-            } catch (e: Exception) {
-                Log.d("Error", e.toString())
-//                throw NoConnectivityException()
             }
-
-        } else {
+        }else {
             getTokenFromServer()
         }
         return songList
@@ -81,56 +70,5 @@ class HomeRepo(private val context: Context) {
 
 }
 
-
-
-
-//call.enqueue(object : Callback<AudioModelApi> {
-//    override fun onResponse(
-//        call: Call<AudioModelApi>,
-//        response: Response<AudioModelApi>
-//    ) {
-//        if (response.isSuccessful) {
-//            Log.d("tracks", "Response")
-//            Log.d("Tokenss", response.code().toString())
-//
-//            Log.d(
-//                "tracks",
-//                response.body()!!.tracks.items[0].track.artists.toString()
-//            )
-//            Log.d(
-//                "tracks",
-//                response.body()!!.tracks.items[0].track.duration_ms.toString()
-//            )
-//            Log.d("tracks", response.body()!!.tracks.items[0].track.href.toString())
-//            Log.d("tracks", response.body()!!.tracks.items[0].track.name.toString())
-//            Log.d(
-//                "tracks",
-//                response.body()?.tracks?.items?.get(0)?.track?.preview_url.toString()
-//            )
-//
-//            songList = response.body()!!.tracks.items
-//            songList.forEach {
-//                Log.d("track", it.track.name)
-//            }
-//
-//        } else {
-//            when (response.code()) {
-//                401 -> {
-//                    getTokenFromServer()
-//                    call.clone().enqueue(this)
-//                }
-//                else -> {
-//                    Log.i("Response", "Not 401")
-//                }
-//            }
-//
-//        }
-//    }
-//
-//    override fun onFailure(call: Call<AudioModelApi>, t: Throwable) {
-//        Log.d("onfailure", t.message.toString())
-//    }
-//
-//})
 
 

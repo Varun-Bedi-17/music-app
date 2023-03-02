@@ -183,12 +183,6 @@ class MusicPlayerActivity : AppCompatActivity(), View.OnClickListener, ServiceCo
         return "$minutes:$seconds"
     }
 
-//    override fun onBackPressed() {
-//        stopPlaying()
-//        musicService!!.stopForeground(true)
-//        super.onBackPressed()
-//
-//    }
 
     override fun onServiceConnected(p0: ComponentName?, service: IBinder?) {
         val binder = service as MusicService.MyBinder
