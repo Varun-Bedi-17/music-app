@@ -6,7 +6,9 @@
 
     </data>
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root_constraint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -21,10 +23,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:background="#575757"
                 android:padding="10dp">
 
@@ -34,12 +35,21 @@
                     android:contentDescription="@string/song_logo"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     android:background="#C6F492" />
 
+
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/linear"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    app:layout_constraintStart_toEndOf="@id/songIcon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/download_btn"
                     android:layout_marginStart="5dp">
 
                     <TextView
@@ -58,8 +68,21 @@
                         android:textSize="16sp"
                         android:textColor="@color/white"/>
                 </LinearLayout>
+                <ImageView
+                    android:id="@+id/download_btn"
+                    android:layout_width="35dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/ic_downloads_icon_foreground"
+                    android:contentDescription="@string/downloads"
+                    android:visibility="gone"
 
-            </LinearLayout>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.cardview.widget.CardView>

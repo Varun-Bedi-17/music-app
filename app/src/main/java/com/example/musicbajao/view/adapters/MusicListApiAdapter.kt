@@ -3,6 +3,7 @@ package com.example.musicbajao.view.adapters
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -11,8 +12,13 @@ import com.example.musicbajao.R
 import com.example.musicbajao.databinding.RecyclerAudioCardBinding
 import com.example.musicbajao.model.repo.musicapi.data.Item
 import com.example.musicbajao.view.activity.MusicPlayerActivityApi
+import com.example.musicbajao.view.fragment.HomeFragment
 
-class MusicListApiAdapter(val context: Context, private var audioList: List<Item>) :
+class MusicListApiAdapter(
+    val context: Context,
+    private var audioList: List<Item>,
+    private val homeFragment: HomeFragment
+) :
     RecyclerView.Adapter<MusicListApiAdapter.MusicListViewHolder>() {
 
     private lateinit var binding: RecyclerAudioCardBinding
@@ -29,6 +35,8 @@ class MusicListApiAdapter(val context: Context, private var audioList: List<Item
     override fun onBindViewHolder(holder: MusicListViewHolder, position: Int) {
 
         binding.songName.text = audioList[position].track.name
+        binding.downloadBtn.visibility = View.VISIBLE
+
 
         var artist = audioList[position].track.artists[0].name
         var c = 0
@@ -52,6 +60,10 @@ class MusicListApiAdapter(val context: Context, private var audioList: List<Item
             context.startActivity(intent)
         }
 
+        binding.downloadBtn.setOnClickListener {
+            homeFragment.downloadSongsUsingWorkManager(audioList, position)
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -66,8 +78,4 @@ class MusicListApiAdapter(val context: Context, private var audioList: List<Item
     class MusicListViewHolder(binding: RecyclerAudioCardBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    fun setData(data: List<Item>) {
-        audioList = data
-        notifyDataSetChanged()
-    }
 }
